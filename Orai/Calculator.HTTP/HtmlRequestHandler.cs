@@ -27,16 +27,18 @@ public class HtmlRequestHandler : IRequestHandler
         if (request.Path.LocalPath != _serverPath)
             return false;
 
+        var encoding = new UTF8Encoding(false);
+
         string response = $"""
             HTTP/1.1 200 Ok
             Date: {DateTime.UtcNow:R}
             Content-Type: text/html; charset=utf-8
-            Content-Length: {Encoding.UTF8.GetByteCount(_htmlContent)}
+            Content-Length: {encoding.GetByteCount(_htmlContent)}
 
             {_htmlContent}
             """;
 
-        using var writer = new StreamWriter(responseStream, Encoding.UTF8, leaveOpen: true);
+        using var writer = new StreamWriter(responseStream, encoding, leaveOpen: true);
         await writer.WriteAsync(response);
 
         return true;

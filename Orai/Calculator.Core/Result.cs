@@ -22,6 +22,21 @@ public class Result<TSucces, TError>
         IsSuccess = false;
     }
 
+    public void Visit(Action<TSucces> succes, Action<TError> error)
+    {
+        if (IsSuccess && _success is not null)
+        {
+            succes.Invoke(_success);
+            return;
+        }
+        else if (_error is not null)
+        {
+            error.Invoke(_error);
+            return;
+        }
+        throw new InvalidOperationException("Result is in an invalid state.");
+    }
+
     public override string ToString()
     {
         if (IsSuccess && _success is not null)
