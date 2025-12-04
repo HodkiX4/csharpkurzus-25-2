@@ -39,5 +39,5 @@ public record PetDTO
 
     [Required]
     [EmailAddress]
-    public string? ContactEmail { get; set; }
+    public required string ContactEmail { get; set; }
 };

@@ -15,4 +15,6 @@ public class Pet
     public string? ImageUrl { get; set; }
     public required string ContactEmail { get; set; }
 
+    public int UserId { get; set; }
+    public User? User { get; set; }
 }
