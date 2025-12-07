@@ -15,10 +15,6 @@ public class UpdatePetDTO
 
     [MaxLength(50)]
     public string? Color { get; set; }
-
-    [MaxLength(500)]
-    public string? Description { get; set; }
-
     [MaxLength(200)]
     public string? LocationLastSeen { get; set; }
 
@@ -28,7 +24,4 @@ public class UpdatePetDTO
     [Url]
     [MaxLength(300)]
     public string? ImageUrl { get; set; }
-
-    [EmailAddress]
-    public string? ContactEmail { get; set; }
 }

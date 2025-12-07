@@ -21,10 +21,6 @@ public record PetDTO
     public required string Color { get; set; }
 
     [Required]
-    [MaxLength(500)]
-    public required string Description { get; set; }
-
-    [Required]
     [MaxLength(200)]
     public required string LocationLastSeen { get; set; }
 
@@ -32,12 +28,7 @@ public record PetDTO
     [DataType(DataType.Date)]
     public required DateTime DateLastSeen { get; set; }
 
-    [Required]
     [Url]
     [MaxLength(300)]
     public string? ImageUrl { get; set; }
-
-    [Required]
-    [EmailAddress]
-    public required string ContactEmail { get; set; }
 };

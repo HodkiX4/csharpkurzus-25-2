@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options.UseSqlite(builder.Configuration.GetConnectionString("PetDbConntectionString"))
 );
 
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -34,7 +34,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -44,7 +44,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Pets}/{action=Index}/{id?}"
-);
+    pattern: "{controller=Pets}/{action=Index}/{id?}");
+
 
 app.Run();

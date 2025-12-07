@@ -8,13 +8,13 @@ using MissingPetFinder.Services.Interfaces;
 
 namespace MissingPetFinder.Controllers;
 
-[Route("[controller]")]
+[Route("Auth")]
 public class AuthController(IAuthService authService) : Controller
 {
-    [HttpGet]
+    [HttpGet("Register")]
     public IActionResult Register() => View();
 
-    [HttpPost]
+    [HttpPost("Register")]
     public async Task<IActionResult> Register(RegisterDTO registerDto)
     {
         if (!ModelState.IsValid)
@@ -24,7 +24,7 @@ public class AuthController(IAuthService authService) : Controller
         {
             var user = await authService.RegisterAsync(registerDto);
             await SignInUser(user!);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Pets");
         }
         catch (InvalidOperationException ex)
         {
@@ -38,10 +38,10 @@ public class AuthController(IAuthService authService) : Controller
         }
     }
 
-    [HttpGet]
+    [HttpGet("Login")]
     public IActionResult Login() => View();
 
-    [HttpPost]
+    [HttpPost("Login")]
     public async Task<IActionResult> Login(LoginDTO loginDto)
     {
         if (!ModelState.IsValid)
@@ -51,7 +51,7 @@ public class AuthController(IAuthService authService) : Controller
         {
             var user = await authService.LoginAsync(loginDto);
             await SignInUser(user!);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Pets");
         }
         catch (InvalidOperationException ex)
         {
@@ -65,11 +65,11 @@ public class AuthController(IAuthService authService) : Controller
         }
     }
 
-    [HttpPost]
+    [HttpPost("Logout")]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Pets");
     }
 
     private async Task SignInUser(User user)
