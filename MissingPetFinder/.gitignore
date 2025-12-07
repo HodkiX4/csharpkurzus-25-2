@@ -2,3 +2,4 @@
 # MissingPetFinder
 
 appsettings.Development.json
+*.db
